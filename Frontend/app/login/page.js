@@ -1,15 +1,42 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSignIn = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    // Simulate a login action (replace with actual authentication logic)
-    router.push("/dashboard"); // Redirect to dashboard
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        // Token is set in cookie by the API
+        router.push("/dashboard"); // Redirect to dashboard
+      } else {
+        setError(data.message || "Login failed");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -17,20 +44,27 @@ export default function Login() {
       <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">Welcome back</h1>
         <p className="text-center text-gray-600 mb-6">Please enter your details</p>
+        {error && <p className="text-red-600 text-center">{error}</p>}
         <form className="space-y-4" onSubmit={handleSignIn}>
           <div>
             <input
               type="email"
+              name="email"
               placeholder="Email address"
               className="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(10_168_167/var(--tw-bg-opacity,_1))]"
+              value={formData.email}
+              onChange={handleChange}
               required
             />
           </div>
           <div>
             <input
               type="password"
+              name="password"
               placeholder="Password"
               className="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(10_168_167/var(--tw-bg-opacity,_1))]"
+              value={formData.password}
+              onChange={handleChange}
               required
             />
           </div>

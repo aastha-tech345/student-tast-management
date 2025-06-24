@@ -16,12 +16,14 @@ import Profile from "./Profile";
 import SettingsPage from "./Settings";
 import Reports from "./Reports";
 import DefaultDasboard from "./DefaultDasboard";
+import { useRouter } from "next/navigation";
+
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activePage, setActivePage] = useState("overview");
   const [submenuOpen, setSubmenuOpen] = useState(false);
-
+  const router = useRouter();
   const handleNavigation = (page) => {
     setActivePage(page);
     if (window.innerWidth < 640) {
@@ -159,6 +161,12 @@ export default function Dashboard() {
             <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
           </div>
           <div>
+            <button
+              onClick={() => router.push("/api/logout")}
+              className="bg-red-500 text-white p-2 rounded-md"
+            >
+              Logout
+            </button>
             <span className="text-gray-600 text-sm">Welcome, User</span>
           </div>
         </div>
