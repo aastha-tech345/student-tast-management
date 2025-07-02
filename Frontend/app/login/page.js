@@ -29,8 +29,7 @@ export default function Login() {
 
       const data = await response.json();
       if (response.ok) {
-        // Token is set in cookie by the API
-        router.push("/dashboard"); // Redirect to dashboard
+        router.push("/dashboard");
       } else {
         setError(data.message || "Login failed");
       }
@@ -43,7 +42,9 @@ export default function Login() {
     <div className="container mx-auto p-8 flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">Welcome back</h1>
-        <p className="text-center text-gray-600 mb-6">Please enter your details</p>
+        <p className="text-center text-gray-600 mb-6">
+          Please enter your details
+        </p>
         {error && <p className="text-red-600 text-center">{error}</p>}
         <form className="space-y-4" onSubmit={handleSignIn}>
           <div>
