@@ -17,8 +17,73 @@
 //   CircularProgress,
 // } from "@mui/material";
 // import { alpha } from "@mui/system";
-// import SearchBox from "../search/Search"; // Adjust path as needed
-// import CustomCell from "./CustomCell"; // Import CustomCell
+// import SearchBox from "../search/Search";
+// import CustomCell from "./CustomCell";
+
+// function OrderTableHead({ headCells, order, orderBy, onRequestSort }) {
+//   const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//     [`&.${tableCellClasses.head}`]: {
+//       backgroundColor: '#f3f3f3',
+//       color: theme.palette.common.white,
+//       position: 'sticky',
+//       top: 0,
+//       zIndex: 10,
+//       borderBottom: '1px solid #e0e0e0'
+//     },
+//     [`&.${tableCellClasses.body}`]: {
+//       fontSize: 14,
+//       backgroundColor: 'red'
+//     }
+//   }));
+//   const createSortHandler = (property) => (event) => {
+//     onRequestSort(event, property);
+//   };
+
+//   return (
+//     <TableHead>
+//       <TableRow>
+//         {headCells.map((headCell) => (
+//           <StyledTableCell
+//             key={headCell.id}
+//             align={'left'}
+//             padding={headCell.disablePadding ? 'none' : 'normal'}
+//             sortDirection={orderBy === headCell.id ? order : false}
+//           >
+//             {headCell.id === 'actions' || headCell.id === 'selectbox' || headCell.id === 'approval' ? (
+//               <Typography variant="subtitle2" color="text.secondary" sx={{ textTransform: 'none' }}>
+//                 {headCell.label}
+//               </Typography>
+//             ) : (
+//               <TableSortLabel
+//                 active={orderBy === headCell.id}
+//                 direction={orderBy === headCell.id ? order : 'asc'}
+//                 onClick={createSortHandler(headCell.id)}
+//               >
+//                 <Typography variant="subtitle2" color="text.secondary" sx={{ textTransform: 'none' }}>
+//                   {headCell.label}
+//                 </Typography>
+//                 {orderBy === headCell.id ? (
+//                   <Box component="span" sx={visuallyHidden}>
+//                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+//                   </Box>
+//                 ) : null}
+//               </TableSortLabel>
+//             )}
+//           </StyledTableCell>
+//         ))}
+//       </TableRow>
+//     </TableHead>
+//   );
+// }
+
+// OrderTableHead.propTypes = {
+//   numSelected: PropTypes.number.isRequired,
+//   onRequestSort: PropTypes.func.isRequired,
+//   onSelectAllClick: PropTypes.func.isRequired,
+//   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+//   orderBy: PropTypes.string.isRequired,
+//   rowCount: PropTypes.number.isRequired
+// };
 
 // const StyledTableCell = styled(TableCell)(({ theme }) => ({
 //   [`&.${tableCellClasses.head}`]: {
@@ -43,7 +108,7 @@
 // const TableList = ({
 //   columns,
 //   data = [],
-//   actions = true, // Default to true since we have an action column
+//   actions = true,
 //   onEdit,
 //   onDelete,
 //   pagination = true,
@@ -71,12 +136,16 @@
 //   const theme = useTheme();
 
 //   const [localCurrentPage, setLocalCurrentPage] = useState(currentPage);
-//   const [localRecordsPerPage, setLocalRecordsPerPage] = useState(recordsPerPage);
+//   const [localRecordsPerPage, setLocalRecordsPerPage] =
+//     useState(recordsPerPage);
 
 //   const effectiveCurrentPage = setCurrentPage ? currentPage : localCurrentPage;
 //   const effectiveSetCurrentPage = setCurrentPage || setLocalCurrentPage;
-//   const effectiveRecordsPerPage = setRecordsPerPage ? recordsPerPage : localRecordsPerPage;
-//   const effectiveSetRecordsPerPage = setRecordsPerPage || setLocalRecordsPerPage;
+//   const effectiveRecordsPerPage = setRecordsPerPage
+//     ? recordsPerPage
+//     : localRecordsPerPage;
+//   const effectiveSetRecordsPerPage =
+//     setRecordsPerPage || setLocalRecordsPerPage;
 
 //   const handleChangePage = (event, newPage) => {
 //     const newPageNumber = newPage + 1;
@@ -109,12 +178,13 @@
 //     );
 //   }, [data, search, columns, fetchFun]);
 
-//   const paginatedData = pagination && !fetchFun
-//     ? filteredData.slice(
-//         (effectiveCurrentPage - 1) * effectiveRecordsPerPage,
-//         effectiveCurrentPage * effectiveRecordsPerPage,
-//       )
-//     : filteredData;
+//   const paginatedData =
+//     pagination && !fetchFun
+//       ? filteredData.slice(
+//           (effectiveCurrentPage - 1) * effectiveRecordsPerPage,
+//           effectiveCurrentPage * effectiveRecordsPerPage,
+//         )
+//       : filteredData;
 
 //   const isItemSelected = (row) => selectedRow && row.id === selectedRow.id;
 
@@ -136,12 +206,12 @@
 //         >
 //           {title}
 //         </Typography>
-// <SearchBox
-//   value={search}
-//   onChange={handleSearchChange}
-//   placeholder="Search here..."
-//   width="300px"
-// />
+//         <SearchBox
+//           value={search}
+//           onChange={handleSearchChange}
+//           placeholder="Search here..."
+//           width="300px"
+//         />
 //       </Box>
 
 //       <Paper
@@ -177,26 +247,14 @@
 //           }}
 //         >
 //           <Table stickyHeader aria-label="reusable table">
-//             <TableHead>
-//               <TableRow>
-//                 {columns.map((column) => (
-//                   <StyledTableCell
-//                     key={column.id}
-//                     align={column.align || "left"}
-//                     padding={column.disablePadding ? "none" : "normal"}
-//                   >
-//                     <Typography
-//                       variant="subtitle2"
-//                       color="text.secondary"
-//                       sx={{ textTransform: "none" }}
-//                     >
-//                       {column.label}
-//                     </Typography>
-//                   </StyledTableCell>
-//                 ))}
-//               </TableRow>
-//             </TableHead>
-
+//           <OrderTableHead
+//               headCells={headCells}
+//               numSelected={selected.length}
+//               order={order}
+//               orderBy={orderBy}
+//               onRequestSort={handleRequestSort}
+//               rowCount={rows.length}
+//             />
 //             <TableBody>
 //               {paginatedData.length > 0 ? (
 //                 paginatedData.map((row, index) => (
@@ -205,7 +263,10 @@
 //                     role="checkbox"
 //                     sx={{
 //                       "&:hover": {
-//                         backgroundColor: alpha(theme.palette.primary.light, 0.1),
+//                         backgroundColor: alpha(
+//                           theme.palette.primary.light,
+//                           0.1,
+//                         ),
 //                         transition: "background-color 0.2s",
 //                       },
 //                       cursor: handleRowClick ? "pointer" : "default",
@@ -228,6 +289,7 @@
 //                             title,
 //                             fetchFun,
 //                             tableType,
+//                             setCurrentPage,
 //                           })
 //                         ) : (
 //                           <CustomCell
@@ -239,6 +301,7 @@
 //                             tableType={tableType}
 //                             onEdit={onEdit}
 //                             onDelete={onDelete}
+//                             setCurrentPage={setCurrentPage}
 //                           />
 //                         )}
 //                       </StyledTableCell>
@@ -274,9 +337,10 @@
 //             onRowsPerPageChange={handleChangeRowsPerPage}
 //             sx={{
 //               borderTop: "1px solid #e0e0e0",
-//               "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
-//                 color: theme.palette.text.primary,
-//               },
+//               "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
+//                 {
+//                   color: theme.palette.text.primary,
+//                 },
 //               "& .MuiTablePagination-actions button": {
 //                 color: theme.palette.primary.main,
 //               },
@@ -344,10 +408,23 @@ import {
   Box,
   Typography,
   CircularProgress,
+  TableSortLabel,
 } from "@mui/material";
 import { alpha } from "@mui/system";
 import SearchBox from "../search/Search";
 import CustomCell from "./CustomCell";
+
+const visuallyHidden = {
+  border: 0,
+  clip: "rect(0 0 0 0)",
+  height: 1,
+  margin: -1,
+  overflow: "hidden",
+  padding: 0,
+  position: "absolute",
+  top: 20,
+  width: 1,
+};
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -368,6 +445,69 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.text.primary,
   },
 }));
+
+function OrderTableHead({ headCells, order, orderBy, onRequestSort }) {
+  const { t } = useTranslation();
+
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {headCells.map((headCell) => (
+          <StyledTableCell
+            key={headCell.id}
+            align={headCell.align || "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            {headCell.id === "actions" ||
+            headCell.id === "selectbox" ||
+            headCell.id === "approval" ? (
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+                sx={{ textTransform: "none" }}
+              >
+                {t(headCell.label)}
+              </Typography>
+            ) : (
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+              >
+                <Typography
+                  variant="subtitle2"
+                  color="text.secondary"
+                  sx={{ textTransform: "none" }}
+                >
+                  {t(headCell.label)}
+                </Typography>
+                {orderBy === headCell.id ? (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </Box>
+                ) : null}
+              </TableSortLabel>
+            )}
+          </StyledTableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+}
+
+OrderTableHead.propTypes = {
+  headCells: PropTypes.array.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  orderBy: PropTypes.string.isRequired,
+};
 
 const TableList = ({
   columns,
@@ -410,6 +550,14 @@ const TableList = ({
     : localRecordsPerPage;
   const effectiveSetRecordsPerPage =
     setRecordsPerPage || setLocalRecordsPerPage;
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+    if (fetchFun)
+      fetchFun({ sortField: property, sortOrder: isAsc ? "desc" : "asc" });
+  };
 
   const handleChangePage = (event, newPage) => {
     const newPageNumber = newPage + 1;
@@ -468,12 +616,12 @@ const TableList = ({
           variant="h6"
           sx={{ fontWeight: 400, color: theme.palette.text.primary }}
         >
-          {title}
+          {t(title)}
         </Typography>
         <SearchBox
           value={search}
           onChange={handleSearchChange}
-          placeholder="Search here..."
+          placeholder={t("searchPlaceholder")}
           width="300px"
         />
       </Box>
@@ -511,26 +659,12 @@ const TableList = ({
           }}
         >
           <Table stickyHeader aria-label="reusable table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <StyledTableCell
-                    key={column.id}
-                    align={column.align || "left"}
-                    padding={column.disablePadding ? "none" : "normal"}
-                  >
-                    <Typography
-                      variant="subtitle2"
-                      color="text.secondary"
-                      sx={{ textTransform: "none" }}
-                    >
-                      {column.label}
-                    </Typography>
-                  </StyledTableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-
+            <OrderTableHead
+              headCells={columns}
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+            />
             <TableBody>
               {paginatedData.length > 0 ? (
                 paginatedData.map((row, index) => (
@@ -645,7 +779,7 @@ TableList.propTypes = {
   onDelete: PropTypes.func,
   pagination: PropTypes.bool,
   rowsPerPageOptions: PropTypes.arrayOf(PropTypes.number),
-  title: PropTypes.string,
+
   totalRecords: PropTypes.number,
   currentPage: PropTypes.number,
   setCurrentPage: PropTypes.func,

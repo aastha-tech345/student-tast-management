@@ -6,7 +6,7 @@ export default function SearchBox({
   value = "",
   onChange,
   placeholder = "Search here...",
-  width = "250px",
+  width = "150px",
   showClear = true,
 }) {
   const handleInputChange = (e) => {
@@ -35,7 +35,7 @@ export default function SearchBox({
         value={value}
         onChange={handleInputChange}
         style={{
-          width: "100%",
+          // width: "100%",
           height: "35px",
           padding: "8px 35px 8px 35px",
           borderRadius: "4px",

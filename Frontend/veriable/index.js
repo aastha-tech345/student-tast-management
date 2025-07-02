@@ -1,6 +1,3 @@
-// veriable.js
-import { IconButton } from "@mui/material";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 export const studentData = [
   {
     id: 1,
@@ -33,14 +30,14 @@ export const studentData = [
 ];
 
 export const columns = [
-  { id: "name", label: "Name", minWidth: 100 },
-  { id: "age", label: "Age", minWidth: 100, align: "center" },
+  { id: "name", label: "Name", minWidth: 200 },
+  { id: "age", label: "Age", minWidth: 200, align: "center" },
   {
     id: "email",
     label: "Email",
-    minWidth: 100,
+    minWidth: 200,
     renderCell: (row) => <a href={`mailto:${row.email}`}>{row.email}</a>,
   },
-  { id: "status", label: "Status", align: "center" },
+  { id: "status", label: "Status",  minWidth: 200, align: "center" },
   { id: "action", label: "Action", align: "center" },
 ];
