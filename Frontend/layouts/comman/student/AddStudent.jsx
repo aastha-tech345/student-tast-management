@@ -61,110 +61,170 @@ export default function AddStudent({ open, handleClose, handleSave }) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
+    <Dialog open={open} onClose={handleClose} maxWidth="sm">
       <DialogTitle>Add Student</DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <InputLabel>First Name</InputLabel>
-            <TextField
-              name="firstName"
-              value={studentData.firstName}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{ mt: 0.5, ...inputStyle }}
-            />
+          <Grid container item spacing={2}>
+            <Grid item xs={6}>
+              <InputLabel>First Name</InputLabel>
+              <TextField
+                name="firstName"
+                value={studentData.firstName}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="standard"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": { border: "none" },
+                  },
+                  "& input": { outline: "none" },
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <InputLabel>Last Name</InputLabel>
+              <TextField
+                name="lastName"
+                value={studentData.lastName}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="standard"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": { border: "none" },
+                  },
+                  "& input": { outline: "none" },
+                }}
+              />
+            </Grid>
           </Grid>
 
-          <Grid item xs={6}>
-            <InputLabel>Last Name</InputLabel>
-            <TextField
-              name="lastName"
-              value={studentData.lastName}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{ mt: 0.5, ...inputStyle }}
-            />
+          <Grid container item spacing={2}>
+            <Grid item xs={6}>
+              <InputLabel>Gender</InputLabel>
+              <TextField
+                name="gender"
+                value={studentData.gender}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="standard"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": { border: "none" },
+                  },
+                  "& input": { outline: "none" },
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <InputLabel>Age</InputLabel>
+              <TextField
+                name="age"
+                type="number"
+                value={studentData.age}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="standard"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": { border: "none" },
+                  },
+                  "& input": { outline: "none" },
+                }}
+              />
+            </Grid>
           </Grid>
 
-          <Grid item xs={6}>
-            <InputLabel>Gender</InputLabel>
-            <TextField
-              select
-              name="gender"
-              value={studentData.gender}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{ mt: 0.5, ...inputStyle }}
-            >
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </TextField>
+          <Grid container item spacing={2}>
+            <Grid item xs={6}>
+              <InputLabel>Email</InputLabel>
+              <TextField
+                name="email"
+                type="email"
+                value={studentData.email}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="standard"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": { border: "none" },
+                  },
+                  "& input": { outline: "none" },
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <InputLabel>Phone</InputLabel>
+              <TextField
+                name="phone"
+                value={studentData.phone}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="standard"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": { border: "none" },
+                  },
+                  "& input": { outline: "none" },
+                }}
+              />
+            </Grid>
           </Grid>
 
-          <Grid item xs={6}>
-            <InputLabel>Age</InputLabel>
-            <TextField
-              name="age"
-              type="number"
-              value={studentData.age}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{
-                mt: 0.5,
-                ...inputStyle,
-                "& input": { outline: "none" }, // Extra protection for blue outline
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <InputLabel>Email</InputLabel>
-            <TextField
-              name="email"
-              type="email"
-              value={studentData.email}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{ mt: 0.5, ...inputStyle }}
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <InputLabel>Phone</InputLabel>
-            <TextField
-              name="phone"
-              value={studentData.phone}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{ mt: 0.5, ...inputStyle }}
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <InputLabel>Class / Grade</InputLabel>
-            <TextField
-              name="className"
-              value={studentData.className}
-              onChange={handleChange}
-              fullWidth
-              size="small"
-              variant="outlined"
-              sx={{ mt: 0.5, ...inputStyle }}
-            />
+          <Grid container item spacing={2}>
+            <Grid item xs={12}>
+              <InputLabel>Class / Grade</InputLabel>
+              <TextField
+                name="className"
+                value={studentData.className}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+                variant="filled"
+                sx={{
+                  "& .MuiFilledInput-root": {
+                    height: "30px",
+                    border: "none",
+                    "&:hover": { border: "none" },
+                    "&.Mui-focused": {
+                      border: "none",
+                      boxShadow: "none", // Remove any shadow on focus
+                    },
+                  },
+                  "& .MuiFilledInput-input": {
+                    outline: "none", // Remove browser outline
+                  },
+                  "& .MuiInputBase-root.Mui-focused": {
+                    backgroundColor: "inherit", // Ensure background doesn't change on focus
+                  },
+                }}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </DialogContent>
