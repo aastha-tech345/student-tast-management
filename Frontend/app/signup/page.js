@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { REGISTER_ROUTE } from "@layouts/lib/constant";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -51,7 +52,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch(`${REGISTER_ROUTE}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

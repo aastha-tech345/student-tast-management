@@ -91,7 +91,7 @@ const AddStudent = ({
   const handleSubmit = () => {
     if (!validateForm()) return;
 
-    handleSave(formData); // Pass the form data to the parent for saving
+    handleSave(formData); 
     setAlertMessage(
       data?.id
         ? "Student updated successfully!"
@@ -114,7 +114,6 @@ const AddStudent = ({
       >
         {children}
       </Button>
-
       <Modal open={open} onClose={handleCloseModal}>
         <Box
           component="form"

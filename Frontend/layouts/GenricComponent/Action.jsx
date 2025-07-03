@@ -74,6 +74,7 @@ const Actions = ({
           </Tooltip>
         </Modal>
       )}
+
       {ActionPermission["delete"] && (
         <Delete
           data={data}
